@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class ArcadeSocialApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(ArcadeSocialApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(ArcadeSocialApplication.class, args);
+    }
 
 }

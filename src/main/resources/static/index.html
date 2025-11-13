@@ -39,24 +39,19 @@
         <ul id="messageArea" role="log" aria-live="polite"></ul>
 
         <form id="messageForm" novalidate>
-            <div class="form-group">
-                <div class="input-group">
-                    <input type="text" id="message" placeholder="Type a message..." autocomplete="off"
-                           class="form-control" required minlength="1" maxlength="500" />
-                    <button type="submit" class="primary">Send</button>
-                </div>
+            <input type="text" id="message" placeholder="Type a message..." autocomplete="off" class="form-control" required />
+            <div class="input-icons">
+                <div class="input-icon icon-emoji"></div>
+                <div class="input-icon send icon-send"></div>
             </div>
         </form>
     </div>
 </section>
 
 <!-- ==== Scripts ==== -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.1/sockjs.min.js"
-        integrity="sha512-0zJqO+/j7bL8L0iZ8+2v2r6Q3N1Y3yN1V4zWq3K5p2z9i5+8x4U+0zq2JqD9Z/2Z7oP5p5iD2o+6V6vV5V5V5V5V5V5V=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"
-        integrity="sha512-5Z2+4jU5D5U5U5U5U5U5U5U5U5U5U5U5U5U5U5U5U5U5U5U5U5U5U5U5U5U5U5U5U5U5U5U5U5U5U5U5U5U5U5U5U5U5U5U=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.1/sockjs.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
 <script src="/js/main.js" defer></script>
+
 </body>
 </html>

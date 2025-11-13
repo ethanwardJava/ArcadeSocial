@@ -93,20 +93,36 @@ const onMessageReceived = payload => {
     if (msg.type === 'JOIN' || msg.type === 'LEAVE') {
         li.className = 'event-message';
         li.textContent = msg.type === 'JOIN'
-            ? `${msg.sender} joined!`
-            : `${msg.sender} left!`;
+            ? `${msg.sender} joined the chat`
+            : `${msg.sender} left the chat`;
     } else {
-        li.className = 'chat-message';
-        li.appendChild(createAvatar(msg.sender));
+        li.className = `chat-message ${msg.sender === username ? 'sent' : ''}`;
 
-        const nameSpan = document.createElement('span');
-        nameSpan.textContent = msg.sender;
-        li.appendChild(nameSpan);
+        const avatar = document.createElement('div');
+        avatar.className = 'avatar';
+        avatar.textContent = msg.sender[0].toUpperCase();
+        li.appendChild(avatar);
+
+        const bubble = document.createElement('div');
+        bubble.className = 'message-bubble';
+
+        // Optional: Add voice wave (simulate)
+        if (msg.content.includes('[voice]')) {
+            const wave = document.createElement('div');
+            wave.className = 'voice-wave';
+            bubble.appendChild(wave);
+            bubble.innerHTML += msg.content.replace('[voice]', '');
+        } else {
+            bubble.textContent = msg.content;
+        }
+
+        const meta = document.createElement('div');
+        meta.className = 'message-meta';
+        meta.textContent = new Date().toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'});
+        bubble.appendChild(meta);
+
+        li.appendChild(bubble);
     }
-
-    const p = document.createElement('p');
-    p.textContent = msg.content ?? '';
-    li.appendChild(p);
 
     messageArea.appendChild(li);
     messageArea.scrollTop = messageArea.scrollHeight;
@@ -128,3 +144,4 @@ window.addEventListener('beforeunload', disconnect);
 /* ---------- Listeners ---------- */
 usernameForm.addEventListener('submit', connect);
 messageForm.addEventListener('submit', sendMessage);
+

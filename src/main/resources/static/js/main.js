@@ -35,7 +35,7 @@ const connect = (event) => {
     stompClient.connect({}, onConnected, onError);
 };
 
-const onConnected = () => {
+const onConnected = options => {
     // Subscribe to public messages
     stompClient.subscribe('/topic/public', onMessageReceived);
 

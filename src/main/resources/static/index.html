@@ -4,16 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Arcade Social - Gaming Lobby</title>
+
+    <!-- Inter Font -->
     <link href="https://rsms.me/inter/inter.css" rel="stylesheet">
+
+    <!-- Glass-Style CSS -->
     <link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
 
-<!-- Username Page -->
+<!-- ====================== Username Page ====================== -->
 <section id="username-page">
     <div class="username-container">
         <h1 class="app-title">ARCADE SOCIAL</h1>
-        <p class="app-subtitle">Enter the gaming lobby</p>
+        <p class="app-subtitle">Enter the chat</p>
         <form id="usernameForm" novalidate>
             <div class="form-group">
                 <input type="text" id="name" placeholder="Enter your gamer tag" autocomplete="off"
@@ -26,7 +30,7 @@
     </div>
 </section>
 
-<!-- Chat Lobby -->
+<!-- ====================== Chat Lobby ====================== -->
 <section id="chat-page" class="hidden">
     <div class="lobby-container">
         <!-- Sidebar -->
@@ -37,17 +41,17 @@
             </div>
 
             <div class="online-users" id="onlineUsers">
-                <!-- Online users will be populated by JavaScript -->
+                <!-- Populated by JS -->
             </div>
 
             <div class="quick-actions">
                 <button class="btn-secondary" onclick="createGameRoom()">
-                    🎮 Create Game Room
+                    Create Game Room
                 </button>
             </div>
         </aside>
 
-        <!-- Main Chat -->
+        <!-- Main Chat Area -->
         <main class="main-chat">
             <header class="chat-header">
                 <h2 class="chat-title">Global Chat</h2>
@@ -57,7 +61,7 @@
             <div class="connecting" id="connectingEl">Connecting to lobby...</div>
 
             <div class="messages-container" id="messageArea">
-                <!-- Messages will be populated by JavaScript -->
+                <!-- Messages go here -->
             </div>
 
             <div class="chat-input-container">
@@ -71,7 +75,7 @@
     </div>
 </section>
 
-<!-- Scripts -->
+<!-- ====================== Scripts ====================== -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.1/sockjs.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
 <script src="/js/main.js"></script>

@@ -1,4 +1,4 @@
-/* Arcade Social - Black & White Gaming Lobby */
+/* Arcade Social - Black & White Gaming Lobby with Glass UI */
 :root {
     --bg-primary: #000000;
     --bg-secondary: #1a1a1a;
@@ -8,8 +8,12 @@
     --text-primary: #ffffff;
     --text-secondary: #b0b0b0;
     --text-muted: #808080;
-    --border-color: #404040;
+    --border-color: rgba(255, 255, 255, 0.1);
     --success-color: #ffffff;
+    --glass-bg: rgba(26, 26, 26, 0.45);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
+    --glass-inner: inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
 * {
@@ -20,10 +24,32 @@
 
 body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    background: var(--bg-primary);
+    background:
+            radial-gradient(circle at top left, rgba(40, 40, 40, 0.3), transparent 50%),
+            radial-gradient(circle at bottom right, rgba(20, 20, 20, 0.4), transparent 50%),
+            var(--bg-primary);
+    background-attachment: fixed;
     color: var(--text-primary);
     height: 100vh;
     overflow: hidden;
+}
+
+/* Glass Effect Utility */
+.glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow), var(--glass-inner);
+    border-radius: 16px;
+}
+
+.glass-light {
+    background: rgba(40, 40, 40, 0.3);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.03);
 }
 
 /* Layout */
@@ -38,21 +64,39 @@ body {
 /* Username Page */
 #username-page {
     height: 100vh;
-    background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+    background:
+            linear-gradient(135deg, rgba(0, 0, 0, 0.7) 0%, rgba(26, 26, 26, 0.6) 100%),
+            var(--bg-primary);
     display: flex;
     align-items: center;
     justify-content: center;
+    backdrop-filter: blur(8px);
 }
 
 .username-container {
-    background: var(--bg-secondary);
-    border: 1px solid var(--border-color);
-    border-radius: 16px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid var(--glass-border);
+    box-shadow:
+            0 20px 50px rgba(0, 0, 0, 0.6),
+            inset 0 1px 0 rgba(255, 255, 255, 0.08);
     padding: 48px;
     width: 100%;
     max-width: 440px;
     text-align: center;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
+    border-radius: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.username-container::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, transparent 50%);
+    pointer-events: none;
+    border-radius: 20px;
 }
 
 .app-title {
@@ -62,6 +106,7 @@ body {
     margin-bottom: 12px;
     text-transform: uppercase;
     letter-spacing: 2px;
+    text-shadow: 0 2px 10px rgba(255, 255, 255, 0.2);
 }
 
 .app-subtitle {
@@ -78,18 +123,22 @@ body {
 .form-input {
     width: 100%;
     padding: 16px 20px;
-    background: var(--bg-primary);
-    border: 1px solid var(--border-color);
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 12px;
     color: var(--text-primary);
     font-size: 16px;
-    transition: all 0.2s ease;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(4px);
 }
 
 .form-input:focus {
     outline: none;
     border-color: var(--accent-primary);
-    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
+    box-shadow:
+            0 0 0 3px rgba(255, 255, 255, 0.15),
+            0 0 20px rgba(255, 255, 255, 0.1);
+    background: rgba(10, 10, 10, 0.5);
 }
 
 .form-input::placeholder {
@@ -99,44 +148,56 @@ body {
 .btn-primary {
     width: 100%;
     padding: 16px 20px;
-    background: var(--accent-primary);
+    background: rgba(255, 255, 255, 0.9);
     border: none;
     border-radius: 12px;
     color: var(--bg-primary);
     font-size: 16px;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2);
 }
 
 .btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2);
+    transform: translateY(-3px);
+    background: #ffffff;
+    box-shadow: 0 12px 30px rgba(255, 255, 255, 0.3);
 }
 
 /* Chat Lobby */
 #chat-page {
     height: 100vh;
-    background: var(--bg-primary);
+    background: transparent;
 }
 
 .lobby-container {
     height: 100vh;
     display: flex;
+    background:
+            radial-gradient(circle at 20% 80%, rgba(40, 40, 40, 0.2), transparent 50%),
+            radial-gradient(circle at 80% 20%, rgba(20, 20, 20, 0.2), transparent 50%),
+            var(--bg-primary);
 }
 
 /* Sidebar */
 .sidebar {
     width: 280px;
-    background: var(--bg-secondary);
-    border-right: 1px solid var(--border-color);
+    background: transparent;
+    border-right: 1px solid var(--glass-border);
     display: flex;
     flex-direction: column;
+    backdrop-filter: blur(4px);
 }
 
 .sidebar-header {
     padding: 24px;
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--glass-border);
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    border-radius: 16px 16px 0 0;
+    margin: 12px 12px 0;
 }
 
 .sidebar-title {
@@ -150,6 +211,7 @@ body {
     color: var(--success-color);
     font-size: 0.9rem;
     font-weight: 500;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.5);
 }
 
 /* Online Users */
@@ -157,21 +219,29 @@ body {
     flex: 1;
     padding: 16px;
     overflow-y: auto;
+    margin: 12px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    border-radius: 0 0 16px 16px;
+    border: 1px solid var(--glass-border);
+    border-top: none;
 }
 
 .user-item {
     display: flex;
     align-items: center;
     padding: 12px;
-    border-radius: 8px;
+    border-radius: 12px;
     margin-bottom: 8px;
-    transition: all 0.2s ease;
+    transition: all 0.3s ease;
     border: 1px solid transparent;
+    background: rgba(255, 255, 255, 0.03);
 }
 
 .user-item:hover {
-    background: var(--bg-tertiary);
-    border-color: var(--border-color);
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.15);
+    transform: translateY(-1px);
 }
 
 .user-avatar {
@@ -186,7 +256,8 @@ body {
     font-weight: 600;
     font-size: 14px;
     margin-right: 12px;
-    border: 2px solid var(--border-color);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 .user-info {
@@ -212,31 +283,40 @@ body {
     border-radius: 50%;
     background: var(--success-color);
     margin-right: 6px;
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+    animation: pulse 2s infinite;
 }
 
 /* Quick Actions */
 .quick-actions {
     padding: 20px;
-    border-top: 1px solid var(--border-color);
+    border-top: 1px solid var(--glass-border);
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    margin: 0 12px 12px;
+    border-radius: 0 0 16px 16px;
 }
 
 .btn-secondary {
     width: 100%;
     padding: 12px;
-    background: var(--bg-tertiary);
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
     color: var(--text-primary);
     font-size: 0.9rem;
     font-weight: 500;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(6px);
 }
 
 .btn-secondary:hover {
-    background: var(--accent-primary);
+    background: rgba(255, 255, 255, 0.9);
     color: var(--bg-primary);
     border-color: var(--accent-primary);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(255, 255, 255, 0.2);
 }
 
 /* Main Chat Area */
@@ -244,19 +324,27 @@ body {
     flex: 1;
     display: flex;
     flex-direction: column;
-    background: var(--bg-primary);
+    background: transparent;
+    margin: 12px;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: var(--glass-shadow);
+    border: 1px solid var(--glass-border);
 }
 
 .chat-header {
     padding: 20px 24px;
-    border-bottom: 1px solid var(--border-color);
-    background: var(--bg-secondary);
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--glass-border);
+    box-shadow: var(--glass-inner);
 }
 
 .chat-title {
     font-size: 1.3rem;
     font-weight: 600;
     color: var(--text-primary);
+    text-shadow: 0 1px 3px rgba(0,0,0,0.4);
 }
 
 .chat-subtitle {
@@ -270,7 +358,7 @@ body {
     flex: 1;
     padding: 24px;
     overflow-y: auto;
-    background: var(--bg-primary);
+    background: transparent;
 }
 
 .messages-container::-webkit-scrollbar {
@@ -278,19 +366,24 @@ body {
 }
 
 .messages-container::-webkit-scrollbar-track {
-    background: var(--bg-secondary);
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 3px;
 }
 
 .messages-container::-webkit-scrollbar-thumb {
-    background: var(--accent-primary);
+    background: rgba(255, 255, 255, 0.3);
     border-radius: 3px;
+}
+
+.messages-container::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.5);
 }
 
 /* Messages */
 .message {
     display: flex;
     margin-bottom: 16px;
-    animation: messageSlide 0.3s ease-out;
+    animation: messageSlide 0.4s ease-out;
 }
 
 .message.sent {
@@ -299,38 +392,41 @@ body {
 
 .message-bubble {
     max-width: 70%;
-    background: var(--bg-secondary);
-    border: 1px solid var(--border-color);
+    background: rgba(40, 40, 40, 0.6);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
     border-radius: 16px;
-    padding: 8px 14px;
+    padding: 10px 16px;
     position: relative;
-    min-height: auto;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
 .message.sent .message-bubble {
-    background: var(--accent-primary);
+    background: rgba(255, 255, 255, 0.9);
     color: var(--bg-primary);
-    border: 1px solid var(--accent-primary);
-    padding: 8px 14px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 6px 20px rgba(255, 255, 255, 0.25);
 }
 
 .message-content {
     font-size: 0.95rem;
-    line-height: 1.4;
+    line-height: 1.5;
     color: var(--text-primary);
     word-wrap: break-word;
 }
 
 .message.sent .message-content {
     color: var(--bg-primary);
+    font-weight: 500;
 }
 
 .message-meta {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 4px;
+    margin-top: 6px;
     font-size: 0.75rem;
+    opacity: 0.8;
 }
 
 .message-sender {
@@ -343,8 +439,7 @@ body {
 }
 
 .message.sent .message-time {
-    color: var(--bg-primary);
-    opacity: 0.8;
+    color: rgba(0, 0, 0, 0.6);
 }
 
 /* Event Messages */
@@ -357,19 +452,22 @@ body {
 .event-text {
     display: inline-block;
     padding: 6px 16px;
-    background: var(--bg-tertiary);
+    background: rgba(50, 50, 50, 0.4);
     color: var(--text-secondary);
     font-size: 0.8rem;
     border-radius: 12px;
     font-style: italic;
-    border: 1px solid var(--border-color);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(6px);
 }
 
 /* Input Area */
 .chat-input-container {
     padding: 20px 24px;
-    background: var(--bg-secondary);
-    border-top: 1px solid var(--border-color);
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    border-top: 1px solid var(--glass-border);
+    box-shadow: var(--glass-inner);
 }
 
 .input-group {
@@ -381,17 +479,20 @@ body {
 .chat-input {
     flex: 1;
     padding: 14px 20px;
-    background: var(--bg-primary);
-    border: 1px solid var(--border-color);
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 12px;
     color: var(--text-primary);
     font-size: 0.95rem;
     outline: none;
-    transition: all 0.2s ease;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(4px);
 }
 
 .chat-input:focus {
     border-color: var(--accent-primary);
+    background: rgba(10, 10, 10, 0.6);
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.15);
 }
 
 .chat-input::placeholder {
@@ -400,38 +501,42 @@ body {
 
 .send-button {
     padding: 14px 24px;
-    background: var(--accent-primary);
+    background: rgba(255, 255, 255, 0.9);
     border: none;
     border-radius: 12px;
     color: var(--bg-primary);
     font-size: 0.95rem;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 6px 18px rgba(255, 255, 255, 0.2);
 }
 
 .send-button:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(255, 255, 255, 0.2);
+    background: #ffffff;
+    box-shadow: 0 10px 25px rgba(255, 255, 255, 0.3);
 }
 
 /* Connection Status */
 .connecting {
     text-align: center;
     padding: 12px;
-    background: var(--bg-tertiary);
+    background: rgba(50, 50, 50, 0.5);
     color: var(--text-secondary);
     font-size: 0.9rem;
-    border-radius: 8px;
+    border-radius: 12px;
     margin: 0 24px 16px 24px;
-    border: 1px solid var(--border-color);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(8px);
 }
 
 /* Animations */
 @keyframes messageSlide {
     from {
         opacity: 0;
-        transform: translateY(10px);
+        transform: translateY(15px);
     }
     to {
         opacity: 1;
@@ -463,16 +568,8 @@ body {
         padding: 32px 24px;
     }
 
-    .messages-container {
+    .messages-container, .chat-header, .chat-input-container {
         padding: 16px;
-    }
-
-    .chat-header {
-        padding: 16px 20px;
-    }
-
-    .chat-input-container {
-        padding: 16px 20px;
     }
 }
 
@@ -483,13 +580,24 @@ body {
 
     .sidebar {
         width: 100%;
-        height: 200px;
+        height: auto;
+        min-height: 200px;
         border-right: none;
-        border-bottom: 1px solid var(--border-color);
+        border-bottom: 1px solid var(--glass-border);
+        margin: 12px 12px 0 12px;
+        border-radius: 16px 16px 0 0;
     }
 
     .online-users {
-        flex: none;
-        height: 120px;
+        height: auto;
+        min-height: 120px;
+        margin: 0;
+        border-radius: 0;
+        border: none;
+    }
+
+    .main-chat {
+        margin: 0 12px 12px 12px;
+        border-radius: 0 0 16px 16px;
     }
 }

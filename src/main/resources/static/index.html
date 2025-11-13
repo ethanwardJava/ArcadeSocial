@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Arcade Social</title>
+
+    <!-- Inter Font -->
+    <link href="https://rsms.me/inter/inter.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+
+<!-- ==== Username Page ==== -->
+<section id="username-page" aria-labelledby="username-title">
+    <div class="username-page-container">
+        <h1 id="username-title" class="title">Type your username to enter the Chatroom</h1>
+        <form id="usernameForm" novalidate>
+            <div class="form-group">
+                <input type="text" id="name" placeholder="Username" autocomplete="off"
+                       class="form-control" required minlength="1" maxlength="30" />
+            </div>
+            <div class="form-group">
+                <button type="submit" class="accent username-submit">Start Chatting</button>
+            </div>
+        </form>
+    </div>
+</section>
+
+<!-- ==== Chat Page ==== -->
+<section id="chat-page" class="hidden" aria-labelledby="chat-title">
+    <div class="chat-container">
+        <header class="chat-header">
+            <h2 id="chat-title">Arcade Social</h2>
+        </header>
+
+        <div class="connecting" aria-live="polite">Connecting...</div>
+
+        <ul id="messageArea" role="log" aria-live="polite"></ul>
+
+        <form id="messageForm" novalidate>
+            <div class="form-group">
+                <div class="input-group">
+                    <input type="text" id="message" placeholder="Type a message..." autocomplete="off"
+                           class="form-control" required minlength="1" maxlength="500" />
+                    <button type="submit" class="primary">Send</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+
+<!-- ==== Scripts ==== -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.1/sockjs.min.js"
+        integrity="sha512-0zJqO+/j7bL8L0iZ8+2v2r6Q3N1Y3yN1V4zWq3K5p2z9i5+8x4U+0zq2JqD9Z/2Z7oP5p5iD2o+6V6vV5V5V5V5V5V5V=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"
+        integrity="sha512-5Z2+4jU5D5U5U5U5U5U5U5U5U5U5U5U5U5U5U5U5U5U5U5U5U5U5U5U5U5U5U5U5U5U5U5U5U5U5U5U5U5U5U5U5U5U5U5U=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="/js/main.js" defer></script>
+</body>
+</html>

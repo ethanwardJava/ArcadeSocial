@@ -29,7 +29,7 @@ public class ChatController {
         return message;
     }
 
-    /* Optional: explicit removeUser endpoint (called from JS on unload) */
+    /* explicit removeUser endpoint (called from JS on unload) */
     @MessageMapping("/chat.removeUser")
     @SendTo("/topic/public")
     public ChatMessage removeUser(@Payload ChatMessage message) {

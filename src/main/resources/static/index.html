@@ -2,56 +2,79 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Arcade Social</title>
-
-    <!-- Inter Font -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arcade Social - Gaming Lobby</title>
     <link href="https://rsms.me/inter/inter.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
 
-<!-- ==== Username Page ==== -->
-<section id="username-page" aria-labelledby="username-title">
-    <div class="username-page-container">
-        <h1 id="username-title" class="title">Type your username to enter the Chatroom</h1>
+<!-- Username Page -->
+<section id="username-page">
+    <div class="username-container">
+        <h1 class="app-title">ARCADE SOCIAL</h1>
+        <p class="app-subtitle">Enter the gaming lobby</p>
         <form id="usernameForm" novalidate>
             <div class="form-group">
-                <input type="text" id="name" placeholder="Username" autocomplete="off"
-                       class="form-control" required minlength="1" maxlength="30" />
+                <input type="text" id="name" placeholder="Enter your gamer tag" autocomplete="off"
+                       class="form-input" required minlength="1" maxlength="30" />
             </div>
             <div class="form-group">
-                <button type="submit" class="accent username-submit">Start Chatting</button>
+                <button type="submit" class="btn-primary">Join Lobby</button>
             </div>
         </form>
     </div>
 </section>
 
-<!-- ==== Chat Page ==== -->
-<section id="chat-page" class="hidden" aria-labelledby="chat-title">
-    <div class="chat-container">
-        <header class="chat-header">
-            <h2 id="chat-title">Arcade Social</h2>
-        </header>
-
-        <div class="connecting" aria-live="polite">Connecting...</div>
-
-        <ul id="messageArea" role="log" aria-live="polite"></ul>
-
-        <form id="messageForm" novalidate>
-            <input type="text" id="message" placeholder="Type a message..." autocomplete="off" class="form-control" required />
-            <div class="input-icons">
-                <div class="input-icon icon-emoji"></div>
-                <div class="input-icon send icon-send"></div>
+<!-- Chat Lobby -->
+<section id="chat-page" class="hidden">
+    <div class="lobby-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2 class="sidebar-title">Online Players</h2>
+                <div class="online-count"><span id="onlineCount">0</span> players online</div>
             </div>
-        </form>
+
+            <div class="online-users" id="onlineUsers">
+                <!-- Online users will be populated by JavaScript -->
+            </div>
+
+            <div class="quick-actions">
+                <button class="btn-secondary" onclick="createGameRoom()">
+                    🎮 Create Game Room
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Chat -->
+        <main class="main-chat">
+            <header class="chat-header">
+                <h2 class="chat-title">Global Chat</h2>
+                <div class="chat-subtitle">Chat with players worldwide</div>
+            </header>
+
+            <div class="connecting" id="connectingEl">Connecting to lobby...</div>
+
+            <div class="messages-container" id="messageArea">
+                <!-- Messages will be populated by JavaScript -->
+            </div>
+
+            <div class="chat-input-container">
+                <form id="messageForm" novalidate class="input-group">
+                    <input type="text" id="message" placeholder="Type your message..." autocomplete="off"
+                           class="chat-input" required />
+                    <button type="submit" class="send-button">Send</button>
+                </form>
+            </div>
+        </main>
     </div>
 </section>
 
-<!-- ==== Scripts ==== -->
+<!-- Scripts -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.1/sockjs.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
-<script src="/js/main.js" defer></script>
+<script src="/js/main.js"></script>
 
 </body>
 </html>
